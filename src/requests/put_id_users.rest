@@ -1,0 +1,11 @@
+PUT http://localhost:3001/api/user/61fd66e2d58d78d5e7601799
+content-type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZmQ2NmUyZDU4ZDc4ZDVlNzYwMTc5OSIsInVzZXJuYW1lIjoic2FtcGxlIiwiaWF0IjoxNjQ0NTMzNDczfQ.M7K16XgE0TQtBSl_cuPpaBCCcTCGPU1A4ttPWVvEqOc
+
+{
+    "username": "sample",
+    "name": "sample",
+    "password": "samplepw",
+    "links": ["1sample","2samples"],
+    "description": "sample description"
+}

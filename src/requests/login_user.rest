@@ -1,0 +1,18 @@
+### valid
+POST http://localhost:3001/api/login
+content-type: application/json
+
+{
+    "username": "sample",
+    "password": "sample"
+}
+
+
+### invalid
+POST http://localhost:3001/api/login
+content-type: application/json
+
+{
+    "username": "sample",
+    "password": "samplew"
+}
