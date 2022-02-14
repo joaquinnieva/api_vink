@@ -3,4 +3,4 @@ GET http://localhost:3001/api/user
 
 
 ### by username
-GET http://localhost:3001/api/user/sample
+GET http://localhost:3001/api/user/jqn

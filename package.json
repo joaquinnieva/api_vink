@@ -1,13 +1,13 @@
 {
-  "name": "mongo-api",
+  "name": "vink-api",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "description": "API for vink, developed by Joaquín Nieva",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Joaquín Nieva",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",

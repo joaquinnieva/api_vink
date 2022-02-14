@@ -3,10 +3,11 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
   username: { type: String, required: true },
-  name: { type: String, required: false },
   password: { type: String, required: true },
+  name: { type: String, required: false },
   links: { type: Array, required: false },
   description: { type: String, required: false },
+  image: { type: String, required: false },
 });
 
 UserSchema.set('toJSON', {
