@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
       if (value) {
         return res.json(value).end();
       } else {
-        res.status(404).json({ status: 'Bad Request' }).end();
+        res.status(404).json({ status: 'Bad request' }).end();
       }
     })
     .catch((err) => {
@@ -27,7 +27,7 @@ router.get('/:username', (req, res, next) => {
       if (value) {
         return res.json(value).end();
       } else {
-        res.status(404).json({ status: 'Bad Request' }).end();
+        res.status(404).json({ status: 'Bad request' }).end();
       }
     })
     .catch((err) => {
@@ -36,23 +36,28 @@ router.get('/:username', (req, res, next) => {
 });
 
 // POST a new User
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
   const { username, name, password, links, description, image } = req.body;
   const newUser = new User({ username, name, password, links, description, image });
-  newUser
-    .save()
-    .then((value) => {
-      if (value) {
-        return res.status(201).json({ status: 'User Saved' }).end();
-      } else if (!value) {
-        return res.status(204).json({ status: 'No content' }).end();
-      } else {
-        res.status(404).json({ status: 'Bad Request' }).end();
-      }
-    })
-    .catch((err) => {
-      next(err);
-    });
+  const findUser = await User.findOne({ username });
+  if (!findUser) {
+    newUser
+      .save()
+      .then((value) => {
+        if (value) {
+          return res.status(201).json({ status: 'User created' }).end();
+        } else if (!value) {
+          return res.status(204).json({ status: 'No content' }).end();
+        } else {
+          res.status(404).json({ status: 'Bad request' }).end();
+        }
+      })
+      .catch((err) => {
+        next(err);
+      });
+  } else if (findUser) {
+    res.status(302).json({ status: 'User is already exist' }).end();
+  }
 });
 
 // UPDATE a User by ID
@@ -66,16 +71,16 @@ router.put('/:id', (req, res, next) => {
   }
   const decodedToken = jwt.verify(token, 'jota');
   if (!token || !decodedToken) {
-    return res.status(401).json({ status: 'missig or invalid token' }).end();
+    return res.status(401).json({ status: 'Missig or invalid token' }).end();
   }
 
   const newUser = { username, name, password, links, description, image };
   User.findByIdAndUpdate(req.params.id, newUser)
     .then((value) => {
       if (value) {
-        return res.status(200).json({ status: 'User Updated' }).end();
+        return res.status(200).json({ status: 'User updated' }).end();
       } else {
-        res.status(404).json({ status: 'Bad Request' }).end();
+        res.status(404).json({ status: 'Bad request' }).end();
       }
     })
     .catch((err) => {
@@ -88,9 +93,9 @@ router.delete('/:id', (req, res, next) => {
   User.findByIdAndRemove(req.params.id)
     .then((value) => {
       if (value) {
-        return res.json({ status: 'User Deleted' }).end();
+        return res.json({ status: 'User deleted' }).end();
       } else {
-        res.status(404).json({ status: 'Bad Request' }).end();
+        res.status(404).json({ status: 'Bad request' }).end();
       }
     })
     .catch((err) => {

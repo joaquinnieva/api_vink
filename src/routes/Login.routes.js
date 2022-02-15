@@ -7,18 +7,29 @@ const jwt = require('jsonwebtoken');
 router.post('/', async (req, res, next) => {
   const { username, password } = req.body;
 
-  const userlog = await User.findOne({ username });
+  const userToLogin = await User.findOne({ username });
 
   const userForToken = {
-    id: userlog?._id,
-    username: userlog?.username,
+    id: userToLogin?._id,
+    username: userToLogin?.username,
   };
   const token = jwt.sign(userForToken, 'jota');
 
-  if (password === userlog.password) {
-    res.send({ id: userlog?._id, username, token }).end();
+  if (password === userToLogin.password) {
+    res
+      .send({
+        id: userToLogin._id,
+        username,
+        name: userToLogin.name,
+        description: userToLogin.description,
+        links: userToLogin.links,
+        image: userToLogin.image,
+        background: userToLogin.background,
+        token,
+      })
+      .end();
   } else {
-    res.status(401).json({ status: 'invalid data' }).end();
+    res.status(401).json({ status: 'Invalid data' }).end();
   }
 });
 
