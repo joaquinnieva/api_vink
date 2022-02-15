@@ -16,7 +16,7 @@ router.post('/', async (req, res, next) => {
   const token = jwt.sign(userForToken, 'jota');
 
   if (password === userlog.password) {
-    res.send({ username, password, token }).end();
+    res.send({ id: userlog?._id, username, token }).end();
   } else {
     res.status(401).json({ status: 'invalid data' }).end();
   }

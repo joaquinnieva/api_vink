@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const app = express();
+const cors = require('cors');
 
 // Database connection
 const { mongoose } = require('./database.js');
@@ -12,6 +13,7 @@ app.set('port', process.env.PORT || 3001);
 // Middlewares
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use('/api/user', require('./routes/User.routes'));
