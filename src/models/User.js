@@ -8,6 +8,8 @@ const UserSchema = new Schema({
   links: { type: Array, required: false },
   description: { type: String, required: false },
   image: { type: String, required: false },
+  background: { type: String, required: false },
+  options: { type: Array, required: false },
 });
 
 UserSchema.set('toJSON', {

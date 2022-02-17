@@ -60,9 +60,9 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// UPDATE a User by ID
+// EDIT a User by ID
 router.put('/:id', (req, res, next) => {
-  const { username, name, password, links, description, image } = req.body;
+  const { username, name, password, links, description, image, background, options } = req.body;
 
   const authorization = req.get('authorization');
   let token = null;
@@ -74,7 +74,7 @@ router.put('/:id', (req, res, next) => {
     return res.status(401).json({ status: 'Missig or invalid token' }).end();
   }
 
-  const newUser = { username, name, password, links, description, image };
+  const newUser = { username, name, password, links, description, image, background, options };
   User.findByIdAndUpdate(req.params.id, newUser)
     .then((value) => {
       if (value) {
