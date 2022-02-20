@@ -15,7 +15,7 @@ router.post('/', async (req, res, next) => {
   };
   const token = jwt.sign(userForToken, 'jota');
 
-  if (password === userToLogin.password) {
+  if (password === userToLogin?.password) {
     res
       .send({
         id: userToLogin._id,
