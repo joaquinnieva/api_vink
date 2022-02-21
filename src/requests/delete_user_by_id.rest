@@ -1,1 +1,2 @@
 DELETE  http://localhost:3001/api/user/61fd68114d61d994b8e34dc2
+Authorization:Bearer 

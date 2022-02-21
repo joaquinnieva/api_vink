@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const pw = require('../cred/pw');
 
 // User Model
 const User = require('../models/User');
@@ -69,7 +70,7 @@ router.put('/:id', (req, res, next) => {
   if (authorization && authorization.toLowerCase().startsWith('bearer')) {
     token = authorization.substring(7);
   }
-  const decodedToken = jwt.verify(token, 'jota');
+  const decodedToken = jwt.verify(token, pw.token);
   if (!token || !decodedToken) {
     return res.status(401).json({ status: 'Missig or invalid token' }).end();
   }
@@ -90,6 +91,16 @@ router.put('/:id', (req, res, next) => {
 
 // DELETE a User by ID
 router.delete('/:id', (req, res, next) => {
+  const authorization = req.get('authorization');
+  let token = null;
+  if (authorization && authorization.toLowerCase().startsWith('bearer')) {
+    token = authorization.substring(7);
+  }
+  const decodedToken = jwt.verify(token, pw.token);
+  if (!token || !decodedToken) {
+    return res.status(401).json({ status: 'Missig or invalid token' }).end();
+  }
+
   User.findByIdAndRemove(req.params.id)
     .then((value) => {
       if (value) {
