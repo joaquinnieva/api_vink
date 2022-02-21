@@ -1,2 +1,2 @@
-DELETE  http://localhost:3001/api/user/61fd68114d61d994b8e34dc2
-Authorization:Bearer 
+DELETE  http://localhost:3001/api/user/6213262fd181fb989ef723f9
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMGQ3N2RlZDUxODU1NDE0OGQ3OWI0YyIsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTY0NTA0OTg4MX0.25CGZAoyhlkvDeQtJpV9FKJRtVk-doBgx0PfwXe5UbI
